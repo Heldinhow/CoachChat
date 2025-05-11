@@ -22,6 +22,29 @@ For development with auto-reload:
 npm run dev
 ```
 
+## API Documentation
+
+API documentation is available using Swagger UI at:
+```
+http://localhost:3000/api-docs
+```
+
+## Docker
+
+### Running with Docker
+
+Build and run the Docker image:
+```bash
+docker build -t chatbot-text-api .
+docker run -p 3000:3000 chatbot-text-api
+```
+
+### Running with Docker Compose
+
+```bash
+docker-compose up -d
+```
+
 ## API Endpoints
 
 ### Process Text

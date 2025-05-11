@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const dotenv = require('dotenv');
 const routes = require('./routes');
 const { errorHandler } = require('./middleware/errorHandler');
+const { swaggerUi, swaggerSpec } = require('./swagger');
 
 // Load environment variables
 dotenv.config();
@@ -60,6 +61,13 @@ app.use(helmet());
 // Logging
 app.use(morgan('dev'));
 
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  explorer: true,
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'Chatbot API Documentation'
+}));
+
 // Routes
 app.use('/v1', routes);
 
@@ -69,4 +77,5 @@ app.use(errorHandler);
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`API Documentation available at http://localhost:${PORT}/api-docs`);
 });
